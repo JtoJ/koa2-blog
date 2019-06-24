@@ -18,6 +18,26 @@ const login = async (username, password) => {
 	// })
 }
 
+const logout = async id => {
+	//清除redis里的session
+
+}
+
+const checkOldPwd = async (id, oldPwd) => {
+	// 检查旧密码是否正确
+
+}
+
+const modifyPwd = async (id, newPwd) => {
+	const sql = `
+		update users set pwd=${newPwd} where userid=${id}
+	`
+	const msg = await exec(sql)
+	return msg.affectedRows > 0
+}
+
+
+
 module.exports = {
 	login
 }

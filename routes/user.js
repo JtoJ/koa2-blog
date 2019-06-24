@@ -6,13 +6,6 @@ router.prefix('/api/user')
 
 router.post('/login', async (ctx, next) => {
     const { username, password } = ctx.request.body
-    ctx.body = {
-
-    }
-})
-
-router.post('/login', async (ctx, next) => {
-    const { username, password } = ctx.request.body
     const user = await login(username, password)
     if (user.id) {
         // 设置完之后，会自动同步到redis里，因为在app.js里设置了
@@ -24,5 +17,12 @@ router.post('/login', async (ctx, next) => {
     ctx.body = new ErrorModel('账户或密码错误')        
 
 }) 
+
+router.post('/modifyPassword', async (ctx, next) => {
+    const { oldPassword, newPassword } = ctx.request.body
+    const userId = ctx.session.userid
+    
+
+})
 
 module.exports = router

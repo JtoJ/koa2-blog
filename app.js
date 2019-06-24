@@ -43,7 +43,7 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
-// morgan记录日志
+// morgan记录日志，pm2也有记录日志的功能，不过没有Morgan那么详细
 const env = process.env.NODE_ENV
 if (env !== 'production') {
   app.use(morgan('dev'))
