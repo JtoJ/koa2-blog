@@ -17,9 +17,6 @@ const getList = async (author, keyword) => {
 
 const getDetail = async id => {
 	const sql = `select * from blogs where id='${id}'`
-	// return exec(sql).then(rows => {
-	// 	return rows[0]
-	// })
 	const rows = await exec(sql)
 	return rows[0]
 }
@@ -39,14 +36,6 @@ const newBlog = async (blogData = {}) => {
 	return {
 		id: insertData.insertId
 	}
-	// return exec(sql).then(insertMsg => {
-	// 	// 执行插入后，数据库返回的信息
-	// 	console.log('insertData is ',insertMsg)
-	// 	// insertId是本次插入的数据在数据库的id
-	// 	return {
-	// 		id: insertMsg.insertId
-	// 	}
-	// })
 	
 }
 
@@ -59,28 +48,16 @@ const updateBlog = async (id, blogData = {}) => {
 	`
 	const updateMsg = await exec(sql)
 	return updateMsg.affectedRows > 0
-	// return exec(sql).then(updateMsg => {
-	// 	// affectedRows表示本次更新影响的行数，如果大于0则更新成功
-	// 	if (updateMsg.affectedRows > 0) {
-	// 		return true
-	// 	}
-	// 	return false
-	// })
+	
 }
 
-const deleteBlog = (id, author) => {
+const deleteBlog = async (id, author) => {
 
 	const sql = `
 		delete from blogs where id=${id} and author='${author}'
 	`
 	const delMsg = await exec(sql)
 	return delMsg.affectedRows > 0
-	// return exec(sql).then(delMsg => {
-	// 	if (delMsg.affectedRows > 0) {
-	// 		return true
-	// 	}
-	// 	return false
-	// })
 }
  
 module.exports = {
