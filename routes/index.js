@@ -8,14 +8,18 @@ router.get('/', async (ctx, next) => {
   })
 })
 
-router.get('/string', async (ctx, next) => {
-  ctx.body = 'koa2 string'
+router.get('/testLogin', async (ctx, next) => {
+  const { username, password } = ctx.request.query
+  console.log(username)
+  ctx.session.username = username
+  ctx.session.logined = true
+  ctx.body = 'is logined'
 })
 
-router.get('/json', async (ctx, next) => {
-  ctx.body = {
-    title: 'koa2 json'
-  }
+router.get('/testLogout', async (ctx, next) => {
+  ctx.session.logined = false
+  ctx.body = 'is logout'
 })
+
 
 module.exports = router

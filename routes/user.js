@@ -1,16 +1,23 @@
 const router = require('koa-router')()
-const { login, logout, checkOldPwd, modifyPwd } = require('../controller/user')
+const { registerAccount, login, logout, checkOldPwd, modifyPwd } = require('../controller/user')
 const { SuccessModel, ErrorModel } = require('../model/resModel')
 
 router.prefix('/api/user')
+
+router.post('/register', async (ctx, next) => {
+    const { username, password } = ctx.request.body
+    const data = await registerAccount(username, password)
+    ctx.body = new SuccessModel(data)
+})
 
 router.post('/login', async (ctx, next) => {
     const { username, password } = ctx.request.body
     const user = await login(username, password)
     if (user.id) {
-        // 设置完之后，会自动同步到redis里，因为在app.js里设置了
-        ctx.session.username = user.username
+        // 设置完之后，会自动同步到redis里，redis会为不同的session单独开辟空间，而不会覆盖
+        ctx.session.logined = true
         ctx.session.userid = user.id
+        ctx.session.username = username
         ctx.body = new SuccessModel()
         return
     }
@@ -19,7 +26,11 @@ router.post('/login', async (ctx, next) => {
 }) 
 
 router.post('/logout', async (ctx, next) => {
-    
+    if (ctx.session.userid) {
+        // redis会自动设置当前session，对其他session无影响
+        ctx.session.logined = false
+    }
+    ctx.body = new SuccessModel()
 })
 
 router.post('/modifyPassword', async (ctx, next) => {

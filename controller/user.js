@@ -1,6 +1,18 @@
 const { exec, escape } = require('../db/mysql')
 const { genPassword } = require('../util/cryp')
 
+const registerAccount = async (username, password) => {
+	username = escape(username)
+	password = escape(password)
+	const sql = `
+		insert into users(username,pwd) values(${username},${password})
+	`
+	const msg = await exec(sql)
+	return {
+		id: msg.insertId
+	}
+}
+
 const login = async (username, password) => {
 	// 例如传入的username是'zhangsan '-- ',这样的话'and pwd='这部分就会被注释掉，相当于没有密码就登陆了
 	// 防止sql注入，escape就是对特殊字符进行转义
@@ -38,6 +50,7 @@ const modifyPwd = async (id, newPwd) => {
 
 
 module.exports = {
+	registerAccount,
 	login,
 	checkOldPwd,
 	modifyPwd

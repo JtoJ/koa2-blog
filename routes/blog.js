@@ -16,11 +16,6 @@ router.get('/list', loginCheck, async (ctx, next) => {
     const keyword = ctx.query.keyword || ''
     const listData = await getList(author, keyword)
     ctx.body = new SuccessModel(listData) 
-    // return result.then(listData => {
-    //     res.json(
-    //         new SuccessModel(listData)
-    //     ) 
-    // })
 })
 
 router.get('/detail', loginCheck, async (ctx, next) => {

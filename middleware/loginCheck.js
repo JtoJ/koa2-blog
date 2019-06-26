@@ -1,7 +1,7 @@
 const { ErrorModel } = require('../model/resModel')
 
 const loginCheck = async (ctx, next) => {
-    if (ctx.session.username) {
+    if (ctx.session.logined) {
         await next()
         return
     }
