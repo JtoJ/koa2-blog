@@ -24,7 +24,7 @@ app.use(session({
 
 （3）采用mysql存储用户账户和博客内容信息。
 
-（4）pm2管理系统进程，可配置多进程，最大化利用服务器的硬件资源，当系统挂掉时也能自动重启。
+（4）pm2管理进程，可配置多进程，最大化利用服务器的硬件资源，当系统挂掉时也能自动重启。
 ````json
 {
     "apps": {
@@ -33,12 +33,17 @@ app.use(session({
         "watch": true,
         "ignore_watch": [
             "node_modules",
-            "logs",
-            "pm2logs"
+            "logs"
         ],
         "instances": 2,
-        "out_file": "./pm2logs/pm2-out.log",
-        "error_file": "./pm2logs/pm2-error.log",
+        "instance_var": "INSTANCE_ID",
+        "increment_var": "PORT",
+        "env": {
+            "PORT": 6000,
+            "NODE_ENV": "production"
+        },
+        "out_file": "./logs/pm2/out.log",
+        "error_file": "./logs/pm2/error.log",
         "log_date_format": "YYYY-MM-DD HH:mm:ss",
         "merge_logs": true
     }
