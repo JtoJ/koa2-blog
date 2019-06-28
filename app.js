@@ -15,7 +15,6 @@ const rootRoute = require('./routes/index')
 const blog = require('./routes/blog')
 const user = require('./routes/user')
 const uploadFile = require('./routes/uploadFile')
-const testRoute = require('./routes/testRoute')
 
 const { REDIS_CONF } = require('./conf/db')
 
@@ -79,7 +78,6 @@ app.use(rootRoute.routes(), rootRoute.allowedMethods())
 app.use(blog.routes(), blog.allowedMethods())
 app.use(user.routes(), user.allowedMethods())
 app.use(uploadFile.routes(), uploadFile.allowedMethods())
-app.use(testRoute.routes(), testRoute.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

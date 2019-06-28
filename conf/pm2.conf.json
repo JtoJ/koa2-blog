@@ -5,12 +5,11 @@
         "watch": true,
         "ignore_watch": [
             "node_modules",
-            "logs",
-            "pm2logs"
+            "logs"
         ],
         "instances": 2,
-        "out_file": "./pm2logs/pm2-out.log",
-        "error_file": "./pm2logs/pm2-error.log",
+        "out_file": "./logs/pm2/out.log",
+        "error_file": "./logs/pm2/error.log",
         "log_date_format": "YYYY-MM-DD HH:mm:ss",
         "merge_logs": true
     }
