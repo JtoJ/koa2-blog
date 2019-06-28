@@ -41,18 +41,21 @@ app.use(json())
 
 // morgan记录日志，pm2也有记录日志的功能，不过没有morgan那么详细
 const env = process.env.NODE_ENV
+let fileName = ''
 if (env !== 'production') {
-  app.use(morgan('dev'))
+  fileName = 'devLog.log'
 } else {
   // 生产环境
-  const logFileName = path.join(__dirname, 'logs', 'access.log')
-  const writeStream = fs.createWriteStream(logFileName, {
-    flags: 'a'
-  })
-  app.use(morgan('combined', {
-    stream: writeStream
-  }))
+  fileName = 'access.log'
 }
+const logFilePath = path.join(__dirname, 'logs', fileName)
+const writeStream = fs.createWriteStream(logFilePath, {
+  flags: 'a'
+})
+app.use(morgan('combined', {
+  stream: writeStream
+}))
+
 
 //session配置
 //密匙

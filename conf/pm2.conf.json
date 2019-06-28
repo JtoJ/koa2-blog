@@ -1,15 +1,17 @@
 {
     "apps": {
         "name": "node-koa2",
-        "script": "app.js",
+        "script": "./bin/www",
         "watch": true,
         "ignore_watch": [
             "node_modules",
-            "logs"
+            "logs",
+            "pm2logs"
         ],
-        "instances": 4,
-        "error_file": "logs/err.log",
-        "out_file": "logs/out.log",
-        "log_date_format": "YYYY-MM-DD HH:mm:ss"
+        "instances": 2,
+        "out_file": "./pm2logs/pm2-out.log",
+        "error_file": "./pm2logs/pm2-error.log",
+        "log_date_format": "YYYY-MM-DD HH:mm:ss",
+        "merge_logs": true
     }
 }

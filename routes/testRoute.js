@@ -10,7 +10,7 @@ router.post('/testLogin', async (ctx, next) => {
 router.get('/testLogout', async (ctx, next) => {
     ctx.session.logined = false
     ctx.body = 'is logout'
-  })
-  
-  
-  module.exports = router
+})
+
+
+module.exports = router
