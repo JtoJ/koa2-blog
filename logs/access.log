@@ -2,3 +2,5 @@
 ::ffff:127.0.0.1 - - [28/Jun/2019:07:37:51 +0000] "GET /testLogout HTTP/1.1" 200 9 "-" "PostmanRuntime/7.15.0"
 ::ffff:127.0.0.1 - - [28/Jun/2019:07:42:47 +0000] "GET /testLogin HTTP/1.1" 404 9 "-" "PostmanRuntime/7.15.0"
 ::ffff:127.0.0.1 - - [28/Jun/2019:07:42:59 +0000] "POST /testLogin HTTP/1.1" 200 10 "-" "PostmanRuntime/7.15.0"
+::ffff:127.0.0.1 - - [28/Jun/2019:08:40:50 +0000] "GET / HTTP/1.1" 404 9 "-" "PostmanRuntime/7.15.0"
+::ffff:127.0.0.1 - - [28/Jun/2019:08:41:14 +0000] "GET / HTTP/1.1" 404 9 "-" "PostmanRuntime/7.15.0"

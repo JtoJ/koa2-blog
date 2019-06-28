@@ -8,6 +8,12 @@
             "logs"
         ],
         "instances": 2,
+        "instance_var": "INSTANCE_ID",
+        "increment_var": "PORT",
+        "env": {
+            "PORT": 6000,
+            "NODE_ENV": "production"
+        },
         "out_file": "./logs/pm2/out.log",
         "error_file": "./logs/pm2/error.log",
         "log_date_format": "YYYY-MM-DD HH:mm:ss",
