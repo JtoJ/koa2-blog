@@ -11,7 +11,6 @@ router.prefix('/api/blog')
 
 // 在获取数据之前先登录验证
 router.get('/list', loginCheck, async (ctx, next) => {
-    // koa对query做了处理
     const author = ctx.query.author || ''
     const keyword = ctx.query.keyword || ''
     const listData = await getList(author, keyword)

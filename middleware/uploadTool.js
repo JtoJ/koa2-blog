@@ -13,6 +13,10 @@ const uploadTool = async ctx => {
     } catch (err) {
         ctx.body = new ErrorModel('上传失败！')
     }
+    
+    // reader.on('end', () => {
+    //     console.log('上传完成')
+    // })
 }
 
 module.exports = uploadTool

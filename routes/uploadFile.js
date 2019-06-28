@@ -1,5 +1,5 @@
 const router = require('koa-router')()
-const uploadTool = require('../util/uploadTool')
+const uploadTool = require('../middleware/uploadTool')
 const { SuccessModel } = require('../model/resModel')
 const loginCheck = require('../middleware/loginCheck')
 

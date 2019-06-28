@@ -11,17 +11,16 @@ const path = require('path')
 const fs = require('fs')
 const morgan = require('koa-morgan')
 
+const rootRoute = require('./routes/index')
 const blog = require('./routes/blog')
 const user = require('./routes/user')
 const uploadFile = require('./routes/uploadFile')
-const testRoute = require('./routes/index')
+const testRoute = require('./routes/testRoute')
 
 const { REDIS_CONF } = require('./conf/db')
 
-// error handler
 onerror(app)
 
-// middlewares
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
 }))
@@ -73,6 +72,7 @@ app.use(session({
 }))
 
 // routes
+app.use(rootRoute.routes(), rootRoute.allowedMethods())
 app.use(blog.routes(), blog.allowedMethods())
 app.use(user.routes(), user.allowedMethods())
 app.use(uploadFile.routes(), uploadFile.allowedMethods())
