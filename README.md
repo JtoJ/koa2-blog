@@ -70,6 +70,8 @@ app.use(morgan('combined', {
 
 （6）使用xss库防止xss攻击；使用mysql.escape防止SQL注入。
 
+（7）使用mocha、should、supertest来编写测试用例。
+
 ### 3、功能实现
 
 登录登出、博客的CRUD、上传文件等功能。
