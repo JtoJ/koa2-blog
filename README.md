@@ -1,4 +1,23 @@
-# koa2-blog
+<h1 align="center">koa2-blog</h1>
+
+<p align="center">
+  <a href="#">
+    <img src="https://img.shields.io/badge/koa-2.7.0-brightgreen.svg" alt="koa">
+  </a>
+  <a href="#">
+    <img src="https://img.shields.io/badge/mysql-2.17.1-brightgreen.svg" alt="mysql">
+  </a>
+  <a href="#">
+    <img src="https://img.shields.io/badge/supertest-4.0.2-brightgreen.svg" alt="supertest">
+  </a>
+  <a href="#">
+    <img src="https://img.shields.io/badge/pm2-3.5.1-brightgreen.svg" alt="pm2">
+  </a>
+  
+</p>
+
+
+## 介绍
 
 ### 1、技术栈：node.js + koa2 + redis + mysql + pm2
 
@@ -70,6 +89,8 @@ app.use(morgan('combined', {
 
 （6）使用xss库防止xss攻击；使用mysql.escape防止SQL注入。
 
+（7）使用mocha、should、supertest来编写测试用例。
+
 ### 3、功能实现
 
-登录登出、博客的CRUD、上传文件等功能。
+登录登出、博客的CRUD、上传文件、单元测试等功能。
