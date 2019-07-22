@@ -11,6 +11,7 @@ const path = require('path')
 const fs = require('fs')
 const morgan = require('koa-morgan')
 const CSRF = require('koa-csrf')
+const ratelimit = require('koa-ratelimit')
 
 const rootRoute = require('./routes/index')
 const blog = require('./routes/blog')
@@ -56,6 +57,9 @@ app.use(morgan('combined', {
   stream: writeStream
 }))
 
+const redisInstance = redisStore({
+  all: `${REDIS_CONF.host}:${REDIS_CONF.port}`
+})
 
 //session配置
 //密匙
@@ -69,10 +73,23 @@ app.use(session({
     maxAge: 24 * 60 * 60 * 1000
   },
   // 配置redis，session过期后，会从redis里自动删除
-  store: redisStore({
-    all: `${REDIS_CONF.host}:${REDIS_CONF.port}`
-  })
+  store: redisInstance
 }))
+
+ // request rate limit
+app.use(ratelimit({
+  db: redisInstance,
+  duration: 60000,
+  errorMessage: '请求过于频繁，请稍后再试！',
+  id: (ctx) => ctx.ip,
+  headers: {
+    remaining: 'Rate-Limit-Remaining',
+    reset: 'Rate-Limit-Reset',
+    total: 'Rate-Limit-Total'
+  },
+  max: 100,
+  disableHeader: false,
+}));
 
 app.use(new CSRF({
   invalidTokenMessage: 'Invalid CSRF token',
