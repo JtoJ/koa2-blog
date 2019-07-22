@@ -10,6 +10,7 @@ const redisStore = require('koa-redis')
 const path = require('path')
 const fs = require('fs')
 const morgan = require('koa-morgan')
+const CSRF = require('koa-csrf')
 
 const rootRoute = require('./routes/index')
 const blog = require('./routes/blog')
@@ -72,6 +73,13 @@ app.use(session({
     all: `${REDIS_CONF.host}:${REDIS_CONF.port}`
   })
 }))
+
+app.use(new CSRF({
+  invalidTokenMessage: 'Invalid CSRF token',
+  invalidTokenStatusCode: 403,
+  excludedMethods: [ 'GET', 'HEAD', 'OPTIONS' ],
+  disableQuery: false
+}));
 
 // routes
 app.use(rootRoute.routes(), rootRoute.allowedMethods())
