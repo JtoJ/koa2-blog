@@ -1,6 +1,6 @@
 const router = require('koa-router')()
 const { registerAccount, login, logout, checkOldPwd, modifyPwd } = require('../controller/user')
-const { SuccessModel, ErrorModel } = require('../model/resModel')
+const { SuccessModel } = require('../model/resModel')
 
 router.prefix('/api/user')
 
@@ -21,7 +21,7 @@ router.post('/login', async (ctx, next) => {
         ctx.body = new SuccessModel()
         return
     }
-    ctx.body = new ErrorModel('账户或密码错误')        
+    ctx.throw(40001,'账户或密码错误！')     
 
 }) 
 
@@ -42,10 +42,10 @@ router.post('/modifyPassword', async (ctx, next) => {
         if (modifyCheck) {
             ctx.body = new SuccessModel('密码修改成功！')
         } else {
-            ctx.body = new ErrorModel('密码修改失败！')
+            ctx.throw(40001,'密码修改失败！')
         }
     } else {
-        ctx.body = new ErrorModel('旧密码错误！')
+        ctx.throw(40001,'旧密码错误！')
     }
 
 })

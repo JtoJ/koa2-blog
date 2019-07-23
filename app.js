@@ -104,6 +104,23 @@ app.use(blog.routes(), blog.allowedMethods())
 app.use(user.routes(), user.allowedMethods())
 app.use(uploadFile.routes(), uploadFile.allowedMethods())
 
+// no catch for rejection in promise
+process.on('unhandledRejection', (reason,p) => {
+  let msg = `UnhandledRejection at Promise: ${p}, reason: ${reason}`
+  throw new Error(msg)
+})
+
+// common err handler
+app.use(async (ctx, next) => {
+  try {
+    await next()
+  } catch (error) {
+    ctx.status = error.status || 500
+    ctx.body = error.message
+    ctx.app.emit('error', error, ctx)
+  }
+})
+
 // error-handling
 app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)

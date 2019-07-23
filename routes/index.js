@@ -12,7 +12,7 @@ function handleXSS(data) {
 
 // /*匹配所有路由
 router.get('/*', async (ctx, next) => {
-    console.log('root get')
+    // console.log('root get')
     handleXSS(ctx.request.query)
     next()
 })

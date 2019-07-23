@@ -1,6 +1,5 @@
 const fs = require('fs')
 const path = require('path')
-const { ErrorModel } = require('../model/resModel')
 
 const uploadTool = async ctx => {
     const file = ctx.request.files.file
@@ -11,7 +10,7 @@ const uploadTool = async ctx => {
     try {
         reader.pipe(writer)
     } catch (err) {
-        ctx.body = new ErrorModel('上传失败！')
+        ctx.throw(40001,'上传失败！')
     }
     
     // reader.on('end', () => {

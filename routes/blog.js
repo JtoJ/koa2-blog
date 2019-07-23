@@ -4,7 +4,7 @@ const {
 	getDetail,
 	newBlog
 } = require('../controller/blog')
-const { SuccessModel, ErrorModel } = require('../model/resModel')
+const { SuccessModel } = require('../model/resModel')
 const loginCheck = require('../middleware/loginCheck')
 
 router.prefix('/api/blog')
